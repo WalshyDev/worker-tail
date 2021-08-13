@@ -37,6 +37,13 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
+        if (!obj.success) {
+          for (const msg of obj.errors) {
+            Utils.error(this.logRef, msg.message);
+          }
+          return;
+        }
+
         const url = obj.result.url
         Utils.log(this.logRef, `Connecting to ${url}/ws...`)
         connect(url + '/ws', 'trace-v1', () => {

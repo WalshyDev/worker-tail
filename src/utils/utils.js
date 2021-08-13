@@ -36,12 +36,12 @@ export function logEvent(ref, obj) {
   const outcome = obj.outcome;
   const time = new Date(obj.eventTimestamp).toLocaleString();
 
-  const event = this.eventToString(obj.event);
+  const event = eventToString(obj.event);
 
-  this.log(ref, `[${time}] ${outcome} - ${event}`);
+  log(ref, `[${time}] ${outcome} - ${event}`);
 
-  this.printLogs(ref, obj.logs);
-  this.printExceptions(ref, obj.exceptions);
+  printLogs(ref, obj.logs);
+  printExceptions(ref, obj.exceptions);
 }
 
 export function eventToString(event) {
@@ -60,17 +60,17 @@ export function printLogs(ref, logs) {
   for (const logEvent of logs) {
     const msg = logEvent.message.join(' ');
     if (logEvent.level === 'log') {
-      this.log(ref, `  ${msg}`);
+      log(ref, `  ${msg}`);
     } else if (logEvent.level === 'warn') {
-      this.warn(ref, `  ${msg}`);
+      warn(ref, `  ${msg}`);
     } else {
-      this.error(ref, `  ${msg}`);
+      error(ref, `  ${msg}`);
     }
   }
 }
 
 export function printExceptions(ref, exceptions) {
   for (const exception of exceptions) {
-    this.error(ref, `  [Uncaught Exception] ${exception.name}: ${exception.message}`);
+    error(ref, `  [Uncaught Exception] ${exception.name}: ${exception.message}`);
   }
 }
