@@ -1,41 +1,10 @@
-<h1 align="center">Template</h1>
+# Worker Tail
 
-<h3 align="center">Template README for all my GitHub repositories.</h3>
+[Cloudflare Workers](https://workers.dev) tail in the browser! :smile:
 
-<!-- Badges -->
-<p align="center">
-    <a href="https://github.com/users/WalshyDev/sponsorship" target="_blank">
-        <img src="https://img.shields.io/badge/GitHub%20Sponsors-WalshyDev-orange.svg?style=flat-square" alt="GitHub Sponsors"/>
-    </a>
-    <a href="http://walshy.dev/donate" target="_blank">
-        <img src="https://img.shields.io/badge/PayPal-WalshyDev-blue.svg?style=flat-square" alt="Slack"/>
-    </a>
-</p>
-
-<hr/>
-
-## Hello
-
-This template repository exists so I can easily bring across files such as my FUNDING.md and a nice template for my README.
-
-## Contributing
-
-Contributions are always welcome to this project!  
-Take a look at any existing issues on this repository for starting places to help contribute towards, or simply create your own new contribution to the project.
-
-Please make sure to follow the existing standards within the project such as code styles, naming conventions and commenting/documentation.
-
-When you are ready, simply create a pull request for your contribution and I will review it whenever I can!
-
-### Donating
-
-You can also help me and the project out by sponsoring me through [GitHub Sponsors](https://github.com/users/WalshyDev/sponsorship) or by donating on [PayPal](https://walshy.dev/donate).
-<!-- Donation badges -->
-<p>
-    <a href="https://github.com/users/WalshyDev/sponsorship" target="_blank">
-        <img src="https://img.shields.io/badge/GitHub%20Sponsors-WalshyDev-orange.svg?style=flat-square" alt="GitHub Sponsors"/>
-    </a>
-    <a href="http://walshy.dev/donate" target="_blank">
-        <img src="https://img.shields.io/badge/PayPal-WalshyDev-blue.svg?style=flat-square" alt="Slack"/>
-    </a>
-</p>
+## How to use
+Simply go to https://worker-tail.walshy.dev and put in the details into the input boxes (**Note: These are only sent to Cloudflare**):
+* Account ID - This can be found in the [dashboard](https://dash.cloudflare.com?to=/:account/workers/overview) just look on the right
+* Worker Name - The name of your worker
+* Auth Email - The email of your Cloudflare account
+* Auth Token - This is your auth token, you can re-use your Wrangler one or make a new one
