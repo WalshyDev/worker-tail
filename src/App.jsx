@@ -26,14 +26,22 @@ export default class App extends React.Component {
   onSubmit(event) {
     const { accountId, workerName, authEmail, authKey } = this.state;
 
+    // Check if we're using a key or a token. Keys are in hex and Tokens are in base64.
+    const headers = {};
+    if (/^[a-f0-9]+$/.test(authKey)) {
+      headers['X-Auth-Email'] = authEmail;
+      headers['X-Auth-Key'] = authKey;
+    } else {
+      headers['Authorization'] = 'Bearer ' + authKey;
+    }
+
+    console.log(headers);
+
     Utils.log(this.logRef, 'Loading websocket...')
 
     fetch(`https://cf-cors.walshydev.workers.dev/client/v4/accounts/${accountId}/workers/scripts/${workerName}/tails`, {
       method: 'POST',
-      headers: {
-        'X-Auth-Email': authEmail,
-        'X-Auth-Key': authKey
-      }
+      headers
     })
       .then(res => res.json())
       .then(obj => {
