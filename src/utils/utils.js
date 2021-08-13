@@ -2,7 +2,7 @@ import chalk from 'chalk';
 
 export function log(ref, msg) {
   if (ref.current) {
-    ref.current.value = ref.current.value + `\n[INFO] ${msg}`;
+    ref.current.value = ref.current.value + `\n[INFO]  ${msg}`;
   } else {
     console.log(msg);
   }
@@ -10,7 +10,7 @@ export function log(ref, msg) {
 
 export function warn(ref, msg) {
   if (ref.current) {
-    ref.current.value = ref.current.value + `\n[WARN] ${msg}`;
+    ref.current.value = ref.current.value + `\n[WARN]  ${msg}`;
   } else {
     console.log(chalk.yellow(msg));
   }
