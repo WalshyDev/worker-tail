@@ -76,6 +76,13 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="container">
+        <span>If you're using a API Token then the email field is not required. If you're using an API Key then both are required!</span>
+        <br />
+        <span>
+          <b>Recommended way to auth is with an API Token</b> -{' '}
+          <a href="/wrangler-tail.png">Click here</a>{' '}
+          for an image of what the token creation should look like
+        </span>
         <div className="input-group">
           <input
             type="text"
