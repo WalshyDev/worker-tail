@@ -7,15 +7,30 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    let accountId = '';
+    let authEmail = '';
+    let authKey = '';
+
+    const savedDetails = localStorage.getItem('details');
+    if (savedDetails !== null && savedDetails !== undefined) {
+      const obj = JSON.parse(savedDetails);
+
+      accountId = obj.accountId;
+      authEmail = obj.authEmail;
+      authKey = obj.authKey;
+    }
+
     this.state = {
-      accountId: '',
+      accountId,
       workerName: '',
-      authEmail: '',
-      authKey: '',
+      authEmail,
+      authKey,
+      msg: {},
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.saveDetails = this.saveDetails.bind(this);
     this.logRef = React.createRef();
   }
 
@@ -23,7 +38,7 @@ export default class App extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  onSubmit(event) {
+  onSubmit() {
     const { accountId, workerName, authEmail, authKey } = this.state;
 
     // Check if we're using a key or a token. Keys are in hex and Tokens are in base64.
@@ -73,7 +88,20 @@ export default class App extends React.Component {
       })
   }
 
+  saveDetails() {
+    const { accountId, authEmail, authKey } = this.state;
+
+    if (accountId.length > 0 && authKey.length > 0) {
+      localStorage.setItem('details', JSON.stringify({ accountId, authEmail, authKey }));
+      this.setState({ msg: { class: 'success', message: 'Saved!' } });
+    } else {
+      this.setState({ msg: { class: 'error', message: 'Fill in at least the Account ID and Auth Token (and email if applicable)' } });
+    }
+  }
+
   render() {
+    const { accountId, workerName, authEmail, authKey, msg } = this.state;
+
     return (
       <div className="container">
         <span>If you're using a API Token then the email field is not required. If you're using an API Key then both are required!</span>
@@ -90,7 +118,7 @@ export default class App extends React.Component {
             onChange={this.onChange}
             name="accountId"
             placeholder="Account ID"
-            value={this.state.accountId}
+            value={accountId}
           />
 
           <input
@@ -99,7 +127,7 @@ export default class App extends React.Component {
             onChange={this.onChange}
             name="workerName"
             placeholder="Worker Name"
-            value={this.state.workerName}
+            value={workerName}
           />
 
           <input
@@ -108,7 +136,7 @@ export default class App extends React.Component {
             onChange={this.onChange}
             name="authEmail"
             placeholder="Auth Email"
-            value={this.state.authEmail}
+            value={authEmail}
           />
 
           <input
@@ -117,7 +145,7 @@ export default class App extends React.Component {
             onChange={this.onChange}
             name="authKey"
             placeholder="Auth Token"
-            value={this.state.authKey}
+            value={authKey}
           />
 
           <button
@@ -127,7 +155,17 @@ export default class App extends React.Component {
           >
             Start Tail
           </button>
+
+          <button
+            type="button"
+            className="button"
+            onClick={this.saveDetails}
+          >
+            Save Details in Browser
+          </button>
         </div>
+
+        {msg && <div><span className={msg.class}>{msg.message}</span></div>}
 
         <textarea
           id="log"

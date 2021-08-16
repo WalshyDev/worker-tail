@@ -30,9 +30,14 @@ code {
 .button {
   padding: 10px;
   border-radius: 15px;
+  margin: 10px;
 }
 
 #log {
   display: block;
   width: 100%;
+}
+
+.error {
+  color: red;
 }
